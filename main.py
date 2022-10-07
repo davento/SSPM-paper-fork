@@ -53,8 +53,11 @@ if __name__ == "__main__":
                                              obj_to_vec_embedder.model, one_hot_encoder)
     model.set_student_validation_size(size=3)
     model.set_problem_validation_size(size=3)
-    model.generate_training_sample(data_processor.unique_students, data_processor.unique_problems, 100, 1000)
-    model.train_model(num_epochs=30, batch_size=100, sampling_factor=4, n_iter=10)
+    print("#INIT#")
+    model.generate_training_sample(data_processor.unique_students, data_processor.unique_problems, 10, 100)
+    print("#GENER#")
+    model.train_model(num_epochs=30, batch_size=10, sampling_factor=4, n_iter=5)
+    print("#END#")
     ################################################################################################
 
     #### Save the Trained Model ####

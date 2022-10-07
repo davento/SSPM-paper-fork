@@ -470,4 +470,3 @@ class NsAdaptiveModel(lstm_ns_clustered.NsClusteredModel):
         print("Max Output Sequence Length = ", max_length_tar)
 
         self.train_samples_x, self.train_samples_y, self.max_length_tar = inputSequence, outputSequence, max_length_tar
-

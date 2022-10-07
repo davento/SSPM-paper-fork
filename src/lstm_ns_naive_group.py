@@ -70,4 +70,3 @@ class NsNaiveGroupModel(lstm_ns_random_model.NsRandomModel):
                 max_length_tar = len(element)
         print("Max Output Sequence Length = ", max_length_tar)
         self.train_samples_x, self.train_samples_y, self.max_length_tar = inputSequence, outputSequence, max_length_tar
-

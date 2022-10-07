@@ -4,7 +4,7 @@ import numpy as np
 
 class OneHotEnc:
     def __init__(self):
-        self.model = OneHotEncoder(sparse=False)
+        self.model = OneHotEncoder(sparse=False, handle_unknown = 'ignore')
         self.kc_dimension = None
 
     def train(self, list_words):
@@ -14,7 +14,9 @@ class OneHotEnc:
 
     def transform_to_one_hot(self, kc_seq):
         kc_2d = np.array(kc_seq).reshape(-1, 1)
+        print(kc_seq)
         one_hot = self.model.transform(kc_2d)
+        
         return one_hot
 
     def transform_one_hot_to_kcs(self, one_hot_list):
