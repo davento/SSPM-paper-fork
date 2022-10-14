@@ -7,7 +7,9 @@ from keras.layers import Input, LSTM, Dense, Dropout
 from keras.models import Model, load_model
 from sklearn.model_selection import train_test_split
 import scipy as sc
+from pathlib import Path
 
+path = Path("../main.py").resolve().parents[1]
 
 class LearningModel:
     EMBEDDING_DIMENSION = 300
@@ -190,10 +192,10 @@ class LearningModel:
         return decoded_sentence
 
     def save_model(self, model_name):
-        self.model.save("saved_models/keras_models/"+model_name)
+        self.model.save(path+model_name)
 
     def load_model(self, model_name):
-        self.model = load_model("saved_models/keras_models/"+model_name)
+        self.model = load_model(path+model_name)
 
     def generate_sample(self, file_path, n_rows):
         start_time = time.time()
