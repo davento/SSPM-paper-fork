@@ -25,10 +25,10 @@ if __name__ == "__main__":
 
     ################################################################################################
     # For LSTM-NS-Random Model
-    # model = lstm_ns_random_model.NsRandomModel(200, len(data_processor.unique_kcs), train_file_path,
-    #                                            obj_to_vec_embedder.model, one_hot_encoder)
-    # model.generate_training_sample(n_rows=10000)
-    # model.train_model(num_epochs=5, batch_size=50)
+    model = lstm_ns_random_model.NsRandomModel(200, len(data_processor.unique_kcs), train_file_path,
+                                               obj_to_vec_embedder.model, one_hot_encoder)
+    model.generate_training_sample(n_rows=10000)
+    model.train_model(num_epochs=20, batch_size=50)
     ################################################################################################
 
     ################################################################################################
@@ -49,23 +49,26 @@ if __name__ == "__main__":
 
     ################################################################################################
     # For LSTM-NS-Adaptive Model
-    model = lstm_ns_adaptive.NsAdaptiveModel(200, len(data_processor.unique_kcs), train_file_path, test_file_path,
-                                             obj_to_vec_embedder.model, one_hot_encoder)
-    model.set_student_validation_size(size=3)
-    model.set_problem_validation_size(size=3)
-    print("#INIT#")
-    model.generate_training_sample(data_processor.unique_students, data_processor.unique_problems, 10, 100)
-    print("#GENER#")
-    model.train_model(num_epochs=30, batch_size=10, sampling_factor=4, n_iter=5)
-    print("#END#")
+    # model = lstm_ns_adaptive.NsAdaptiveModel(200, len(data_processor.unique_kcs), train_file_path, test_file_path,
+    #                                          obj_to_vec_embedder.model, one_hot_encoder)
+    # model.set_student_validation_size(size=3)
+    # model.set_problem_validation_size(size=3)
+    # print("#INIT#")
+    # model.generate_training_sample(data_processor.unique_students, data_processor.unique_problems, 10, 100)
+    # print("#GENER#")
+    # model.train_model(num_epochs=30, batch_size=10, sampling_factor=4, n_iter=5)
+    # print("#END#")
     ################################################################################################
 
     #### Save the Trained Model ####
-    # model.save_model("test_model")
+    print("\nSaving model...\n")
+    model.save_model("test_model")
 
     #### Training Accuracy and Test Accuracy for LSTM-NS-Random, LSTM-NS-NaiveGroup and LSTM-NS-Clustered models ####
-    # model.setup_inference_model()
-    # model.evaluate_training_accuracy(100)
+    print("\nEvaluating accuracy...\n")
+    model.setup_inference_model()
+    model.evaluate_training_accuracy(100)
 
-    # test_x, test_y, max_target_length = model.generate_sample(test_file_path, 200)
-    # model.evaluate_model(test_x, test_y, 3, max_target_length, one_hot_encoder.model, "Test")
+    print("\nPrinting metrics...\n")
+    test_x, test_y, max_target_length = model.generate_sample(test_file_path, 200)
+    model.evaluate_model(test_x, test_y, 3, max_target_length, one_hot_encoder.model, "Test")
